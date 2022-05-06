@@ -9,32 +9,32 @@ const usercontroller={
              'Email':request.body.Email,
              'Password':request.body.Password
         }
+        console.log("user data",request.body.Email);
         // const email=request.body.Email;
 
         const promise= useroperations.finduser(obj);
         promise.then(data=>{
-           
-            if(data.length===0){
+        //    console.log('datais ',data)
+            if(data===null){
                 
-                promise.then((data)=>{
-           
+                          
                     response.status(200).send('Login Unsucessfull')
                    
                   
-                    // console.log('login successfully',data);
-                }).catch((err)=>{
-                    response.status(500).send("Invalid Login ID and Password")
-                    // console.log(err.message);
-                 
+                                 
+             
                 }
-                )}
                 else{
-                    console.log("data in data",data[0].Username);
-                    const accesstoken = token.createToken(data[0].Username);
-                    response.status(200).json({accesstoken,message:'Login sucessfully'});
+
+                        // console.log("data in data",data.Username);
+                        const accesstoken = token.createToken(data.Username);
+                        response.status(200).json({accesstoken,message:'Login sucessfully'});
+                                    
                   
                 }
         
+        }).catch(err=>{
+            console.log(err.message);
         })
      
 }

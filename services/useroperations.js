@@ -7,9 +7,9 @@ const useroperations={
         return promise;
     }
 ,
-    finduser(obj){
+ finduser  (obj) {
         // console.log("username",Email);
-        const promise= usermodel.find({Email:obj.Email,Password:obj.Password});
+        const promise=  usermodel.findOne({Email:obj.Email,Password:obj.Password});
        return promise;
      
     }
